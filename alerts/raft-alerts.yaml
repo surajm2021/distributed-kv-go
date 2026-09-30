@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: raft-cluster-alerts
+spec:
+  groups:
+    - name: raft.rules
+      rules:
+        - alert: RaftLeaderElectionFlapping
+          expr: changes(raft_leader_election_total[5m]) > 3
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: Raft leader election flapping detected
