@@ -1,2 +1,2 @@
 package raft
-func (n *NodeState) StartElection() {}
+func (n *NodeState) HandleVoteRequest() bool { return true }
